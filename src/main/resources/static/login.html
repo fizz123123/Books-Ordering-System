@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>書庫系統 - 登入</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body class="login-page">
+
+  <div class="login-card">
+
+    <div class="logo-area">
+      <div class="logo-icon">
+        <i class="fa-solid fa-graduation-cap" style="font-size:44px; color:#8B1A1A;"></i>
+      </div>
+      <div class="logo-title">書庫系統</div>
+      <div class="logo-subtitle">Books Ordering System</div>
+    </div>
+
+    <div class="form-group">
+      <label for="username">帳號</label>
+      <input type="text" id="username" placeholder="請輸入帳號" />
+    </div>
+
+    <div class="form-group">
+      <label for="password">密碼</label>
+      <div class="password-wrapper">
+        <input type="password" id="password" placeholder="請輸入密碼" />
+        <button class="toggle-password" type="button" onclick="togglePassword()" id="toggle-btn" aria-label="顯示或隱藏密碼"></button>
+      </div>
+    </div>
+
+    <div class="error-message" id="error-message"></div>
+
+    <button class="login-btn" id="login-btn" onclick="handleLogin()">登 入</button>
+
+
+
+  </div>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>
