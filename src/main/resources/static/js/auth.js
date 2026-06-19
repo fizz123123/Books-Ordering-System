@@ -35,7 +35,7 @@ window.onload = function() {
     el.classList.remove('show');
   }
 
-  function handleLogin() {
+  async function handleLogin() {
     const username = document.getElementById('username').value.trim();
     const password = document.getElementById('password').value.trim();
     const btn = document.getElementById('login-btn');
@@ -50,31 +50,21 @@ window.onload = function() {
     btn.disabled = true;
     btn.textContent = '登入中...';
 
-    fetch('http://localhost:8080/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username: username, password: password })
-    })
-    .then(function(res) {
-      if (res.status === 401) throw new Error('401');
-      if (!res.ok) throw new Error('error');
-      return res.json();
-    })
-    .then(function(data) {
+    try {
+      const data = await authService.login(username, password);
       sessionStorage.setItem('userId', data.userId);
       sessionStorage.setItem('username', data.username);
       sessionStorage.setItem('role', data.role);
       window.location.href = 'index.html';
-    })
-    .catch(function(err) {
+    } catch (err) {
       btn.disabled = false;
       btn.textContent = '登 入';
-      if (err.message === '401') {
+      if (err.message && err.message.includes('401')) {
         showError('帳號或密碼錯誤');
       } else {
         showError('系統發生錯誤，請稍後再試');
       }
-    });
+    }
   }
 
   document.getElementById('login-btn').onclick = handleLogin;
