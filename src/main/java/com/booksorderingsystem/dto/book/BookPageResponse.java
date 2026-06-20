@@ -1,6 +1,5 @@
-package com.booksorderingsystem.dto;
+package com.booksorderingsystem.dto.book;
 
-import com.booksorderingsystem.entity.Book;
 import lombok.*;
 
 import java.util.List;

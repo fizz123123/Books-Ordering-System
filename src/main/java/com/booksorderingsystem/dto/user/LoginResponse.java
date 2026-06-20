@@ -1,4 +1,4 @@
-package com.booksorderingsystem.dto;
+package com.booksorderingsystem.dto.user;
 
 import com.booksorderingsystem.entity.Role;
 import lombok.*;

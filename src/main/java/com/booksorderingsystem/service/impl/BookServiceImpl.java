@@ -1,8 +1,8 @@
 package com.booksorderingsystem.service.impl;
 
-import com.booksorderingsystem.dto.BookPageResponse;
-import com.booksorderingsystem.dto.BookRequest;
-import com.booksorderingsystem.dto.BookResponse;
+import com.booksorderingsystem.dto.book.BookPageResponse;
+import com.booksorderingsystem.dto.book.BookRequest;
+import com.booksorderingsystem.dto.book.BookResponse;
 import com.booksorderingsystem.entity.Book;
 import com.booksorderingsystem.repository.BookRepository;
 import com.booksorderingsystem.service.BookService;

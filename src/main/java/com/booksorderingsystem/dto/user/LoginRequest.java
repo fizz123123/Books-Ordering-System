@@ -1,4 +1,4 @@
-package com.booksorderingsystem.dto;
+package com.booksorderingsystem.dto.user;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

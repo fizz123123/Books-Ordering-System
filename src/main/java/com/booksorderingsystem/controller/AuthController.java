@@ -1,7 +1,7 @@
 package com.booksorderingsystem.controller;
 
-import com.booksorderingsystem.dto.LoginRequest;
-import com.booksorderingsystem.dto.LoginResponse;
+import com.booksorderingsystem.dto.user.LoginRequest;
+import com.booksorderingsystem.dto.user.LoginResponse;
 import com.booksorderingsystem.service.AuthService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -10,8 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")

@@ -1,7 +1,7 @@
 package com.booksorderingsystem.service.impl;
 
-import com.booksorderingsystem.dto.LoginRequest;
-import com.booksorderingsystem.dto.LoginResponse;
+import com.booksorderingsystem.dto.user.LoginRequest;
+import com.booksorderingsystem.dto.user.LoginResponse;
 import com.booksorderingsystem.entity.User;
 import com.booksorderingsystem.repository.UserRepository;
 import com.booksorderingsystem.service.AuthService;

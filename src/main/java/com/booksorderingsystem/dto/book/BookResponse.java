@@ -1,4 +1,4 @@
-package com.booksorderingsystem.dto;
+package com.booksorderingsystem.dto.book;
 
 import lombok.*;
 

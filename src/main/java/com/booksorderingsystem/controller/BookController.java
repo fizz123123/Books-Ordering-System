@@ -1,10 +1,9 @@
 package com.booksorderingsystem.controller;
 
-import com.booksorderingsystem.dto.BookPageResponse;
-import com.booksorderingsystem.dto.BookRequest;
-import com.booksorderingsystem.dto.BookResponse;
-import com.booksorderingsystem.dto.LoginResponse;
-import com.booksorderingsystem.entity.Book;
+import com.booksorderingsystem.dto.book.BookPageResponse;
+import com.booksorderingsystem.dto.book.BookRequest;
+import com.booksorderingsystem.dto.book.BookResponse;
+import com.booksorderingsystem.dto.user.LoginResponse;
 import com.booksorderingsystem.entity.Role;
 import com.booksorderingsystem.service.BookService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,9 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/books")
