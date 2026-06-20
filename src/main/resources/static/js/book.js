@@ -13,6 +13,10 @@ function switchView(view) {
   document.getElementById('book-list').style.display = view === 'list' ? 'block' : 'none';
 }
 
+function openAiAssistant() {
+  window.location.href = 'ai-book.html';
+}
+
 // 頁面載入時初始化
 window.onload = function() {
   // 預設切換到清單模式

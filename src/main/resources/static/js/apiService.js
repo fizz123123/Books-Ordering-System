@@ -56,3 +56,10 @@ const bookService = {
   }),
   deleteBook: (id) => request(`/books/${id}`, { method: 'DELETE' }),
 };
+
+const aiBookService = {
+  ask: (question) => request('/ai/books/ask', {
+    method: 'POST',
+    body: JSON.stringify({ question }),
+  }),
+};
