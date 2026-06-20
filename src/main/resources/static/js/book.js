@@ -50,36 +50,14 @@ async function loadBooks(keyword, page) {
   if (keyword !== undefined) currentKeyword = keyword;
   if (page !== undefined) currentPage = page;
 
-  showLoading(true);
-
   try {
     const data = await bookService.getBooks(currentPage, currentKeyword);
-    showLoading(false);
     totalPages = data.totalPages || 1;
     renderBooks(data.content || []);
     renderPagination();
   } catch (error) {
-    showLoading(false);
     renderBooks([]);
   }
-}
-
-// 顯示或隱藏載入動畫
-function showLoading(show) {
-  document.getElementById('loading-overlay').classList.toggle('show', show);
-  if (!show) {
-    if (currentView === 'grid') {
-      document.getElementById('book-grid').style.display = 'grid';
-      document.getElementById('book-list').style.display = 'none';
-    } else {
-      document.getElementById('book-grid').style.display = 'none';
-      document.getElementById('book-list').style.display = 'block';
-    }
-  } else {
-    document.getElementById('book-grid').style.display = 'none';
-    document.getElementById('book-list').style.display = 'none';
-  }
-  if (show) document.getElementById('empty-state').style.display = 'none';
 }
 
 // 渲染分頁按鈕（從後端 totalPages 決定）
@@ -134,7 +112,13 @@ function renderPagination() {
 function renderBooks(books) {
   const grid = document.getElementById('book-grid');
   const empty = document.getElementById('empty-state');
+  const tbody = document.getElementById('book-table-body');
   grid.innerHTML = '';
+  tbody.innerHTML = '';
+
+  // 依目前視圖模式切換顯示
+  grid.style.display = currentView === 'grid' ? 'grid' : 'none';
+  document.getElementById('book-list').style.display = currentView === 'list' ? 'block' : 'none';
 
   if (books.length === 0) {
     empty.textContent = currentKeyword ? '查無符合條件的書籍' : '目前書庫尚未上架任何書籍';
@@ -146,9 +130,7 @@ function renderBooks(books) {
   empty.style.display = 'none';
 
   // 清單模式渲染
-  const tbody = document.getElementById('book-table-body');
   const thActions = document.getElementById('th-actions');
-  tbody.innerHTML = '';
   thActions.style.display = '';
   thActions.textContent = currentRole === 'ADMIN' ? '操作' : '連結';
   books.forEach(function(book) {
@@ -255,8 +237,8 @@ function handleSearch() {
   loadBooks(keyword, 1);
 }
 
-// 按 Enter 搜尋
-document.addEventListener('keydown', function(e) {
+// 按 Enter 搜尋（只在搜尋欄位內生效，避免在其他地方誤觸跳回第1頁）
+document.getElementById('search-input').addEventListener('keydown', function(e) {
   if (e.key === 'Enter') handleSearch();
 });
 
@@ -318,6 +300,7 @@ async function handleSubmit() {
   if (price === '' || Number(price) < 0) return showModalError('價格不可小於 0');
 
   const body = { title, author, publisher, isbn, price: Number(price), publisherBookUrl };
+  const isCreating = !editingBookId;
 
   try {
     if (editingBookId) {
@@ -326,7 +309,8 @@ async function handleSubmit() {
       await bookService.createBook(body);
     }
     closeModal();
-    loadBooks(currentKeyword, currentPage);
+    // 新增成功後跳回第 1 頁，才能看到新書（依 bookId 新到舊排序）
+    loadBooks(currentKeyword, isCreating ? 1 : currentPage);
   } catch (error) {
     showModalError('系統發生錯誤，請稍後再試');
   }
