@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>書庫系統 - AI 助理</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body class="ai-page">
+
+<div class="header">
+  <div class="header-left">
+    <button class="header-icon-btn" onclick="goBackToBooks()" title="返回書庫">
+      <i class="fa-solid fa-arrow-left"></i>
+    </button>
+    <i class="fa-solid fa-headset" style="font-size:20px; color:#fff;"></i>
+    <span class="header-title">AI 書籍助理</span>
+  </div>
+  <div class="header-right">
+    <div class="user-dropdown">
+      <button class="user-toggle" id="user-toggle" onclick="toggleDropdown()">
+        <i id="user-icon" class="fa-solid fa-user" style="font-size:15px;color:#F5C9C9;"></i>
+        <span id="header-username"></span>
+        <span class="arrow">▼</span>
+      </button>
+      <div class="dropdown-menu" id="dropdown-menu">
+        <div class="dropdown-header">
+          <div class="dropdown-label">目前登入</div>
+          <div class="dropdown-username" id="dropdown-username"></div>
+        </div>
+        <button class="dropdown-item" onclick="handleLogout()">
+          登出
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main class="ai-shell">
+  <section class="ai-panel">
+    <div class="ai-panel-header">
+      <div class="ai-agent-mark">
+        <i class="fa-solid fa-book-open-reader"></i>
+      </div>
+      <div>
+        <div class="ai-panel-title">書庫智能客服</div>
+        <div class="ai-panel-status">
+          <span class="ai-status-dot"></span>
+          依目前書庫資料回答
+        </div>
+      </div>
+    </div>
+
+    <div class="ai-chat" id="ai-chat" aria-live="polite"></div>
+
+    <div class="ai-suggestions" id="ai-suggestions">
+      <button type="button" onclick="useSuggestion('請推薦適合初學者的書')">初學者書籍</button>
+      <button type="button" onclick="useSuggestion('目前有哪些出版社的書？')">出版社整理</button>
+      <button type="button" onclick="useSuggestion('請找價格較低的書')">價格查詢</button>
+    </div>
+
+    <form class="ai-input-bar" onsubmit="handleAiSubmit(event)" autocomplete="off">
+      <textarea id="ai-question" rows="1" placeholder="輸入想詢問的書籍問題..." maxlength="300" autocomplete="off" spellcheck="false"></textarea>
+      <button class="ai-send-btn" id="ai-send-btn" type="submit" title="送出問題">
+        <i class="fa-solid fa-paper-plane"></i>
+      </button>
+    </form>
+  </section>
+</main>
+
+<script src="js/config.js"></script>
+<script src="js/apiService.js"></script>
+<script src="js/aiBook.js"></script>
+</body>
+</html>
